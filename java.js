@@ -5,7 +5,7 @@ const email = document.querySelector('#email');
 
 const validateText = (input) => {
     let checkDigit = /\d+/;
-    let regEx =  /\W/;       //Jag fattar inte hur jag inkluderar ÅÄÖ i checken.
+    let check =  /\W/;       //Jag fattar inte hur jag inkluderar ÅÄÖ i checken.
 
     
     if(input.value.trim() === '') {
@@ -70,9 +70,7 @@ const validate = input => {
        
         case 'email': return validateEmail(input)
          
-        case 'checkbox': return validateCheck(input)
         
-        case 'password': return input.id !== 'repeat-password' ? validatePassword(input) : samePassword(password, password2)  
         default:
             break;
        
