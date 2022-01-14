@@ -2,6 +2,12 @@ const form = document.querySelector('#registerForm');
 const firstName = document.querySelector('#firstName');
 const lastName = document.querySelector('#lastName');
 const email = document.querySelector('#email');
+const user = {
+    id: [],
+    firstName : [],
+    lastName : [],
+    email : [],
+    };
 
 const validateText = (input) => {
     let checkDigit = /\d+/;
@@ -83,23 +89,31 @@ form.addEventListener('submit', e => {
 
 
 errors = []
+let nummer = 1;
 
 for(let i = 0; i < form.length; i++) {
    errors[i] = validate(form[i])
 }
-console.log(errors)
+console.log(errors);
 if(!errors.includes(false)) {
-   const user = {
-       id: Date.now().toString(),
-       firstName : firstName.value,
-       lastName : lastName.value,
-       email : email.value,
-       }
+        user.id.push(Date.now().toString())
+        user.firstName.push(firstName.value);
+        user.lastName.push(lastName.value);
+        user.email.push(email.value);
+
        console.log(user);
-       document.getElementById("list").innerHTML += `<li>${firstName.value} ${lastName.value}</li>`;
-       document.getElementById("list").innerHTML += `<li class="list_small"><A href="mailto:${email.value}">${email.value}</A></li>`;
-} 
+    //    document.getElementById("list").innerHTML += `<input type="radio" id="${nummer.value}"><label for="${nummer.value}"></label><li>${firstName.value} ${lastName.value}</li>`;
+    //    document.getElementById("list").innerHTML += `<li class="list_small"><A href="mailto:${email.value}">${email.value}</A></li>`;
+  
+    for(let i = 0; i < user.id.length; i++) {
+        
+        document.getElementById("list").innerHTML += `<input type="radio" id="${user.id[i]}"><label for="${user.id[i]}"></label><li>${user.firstName[i]} ${user.lastName[i]}</li>`;
+        document.getElementById("list").innerHTML += `<li class="list_small"><A href="mailto:${user.email[i]}">${user.email[i]}</A></li>`;
+        
+        
+    }
 
 
+}
 });
 
