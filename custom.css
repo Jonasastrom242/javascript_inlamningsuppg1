@@ -42,7 +42,14 @@ html, body {
 .btn-block {
     width: 100%;
 }
-
+.btn-block2 {
+    width: 40%;
+    margin-top: 1rem;
+}
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
 
 #registerForm {
     background-color: #fafafa;

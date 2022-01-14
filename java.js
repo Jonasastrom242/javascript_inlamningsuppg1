@@ -75,41 +75,85 @@ const validate = input => {
         case 'text': return validateText(input)
        
         case 'email': return validateEmail(input)
-         
-        
+
         default:
-            break;
+        break;
        
     }
 }
 
-form.addEventListener('submit', e => {
+
+
+document.getElementById("register").addEventListener('click', e => {
     e.preventDefault();
 
+errors = [];
 
-
-errors = []
-let nummer = 1;
 
 for(let i = 0; i < form.length; i++) {
    errors[i] = validate(form[i])
 }
-console.log(errors);
+
 if(!errors.includes(false)) {
         user.id.push(Date.now().toString())
         user.firstName.push(firstName.value);
         user.lastName.push(lastName.value);
         user.email.push(email.value);
         document.getElementById("list").innerHTML = '';
-        addHTML();
-        console.log(user);
+            {
+            for(let i = 0; i < user.id.length; i++) {
+            document.getElementById("list").innerHTML += `<input type="radio" name="radio_users" value="${user.id[i]}" id="${user.id}"><label for="${user.id[i]}"></label><li id="${user.id}">${user.firstName[i]} ${user.lastName[i]}</li>`;
+            document.getElementById("list").innerHTML += `<li class="list_small" id="${user.id}"><A href="mailto:${user.email[i]}">${user.email[i]}</A></li><hr>`;
+            }
+        };
 }
 
 });
-const addHTML = (input) =>  {
-    for(let i = 0; i < user.id.length; i++) {
-    document.getElementById("list").innerHTML += `<input type="radio" name="radio_users" value="${user.id[i]}"><label for="${user.id[i]}"></label><li>${user.firstName[i]} ${user.lastName[i]}</li>`;
-    document.getElementById("list").innerHTML += `<li class="list_small"><A href="mailto:${user.email[i]}">${user.email[i]}</A></li><hr>`;
-    }
-};
+// {
+//     for(let i = 0; i < user.id.length; i++) {
+//     document.getElementById("list").innerHTML += `<input type="radio" name="radio_users" value="${user.id[i]}"><label for="${user.id[i]}"></label><li>${user.firstName[i]} ${user.lastName[i]}</li>`;
+//     document.getElementById("list").innerHTML += `<li class="list_small"><A href="mailto:${user.email[i]}">${user.email[i]}</A></li><hr>`;
+//     }
+// };
 
+document.getElementById("change").addEventListener('click', e => {
+    e.preventDefault();
+
+errors = [];
+
+
+for(let i = 0; i < form.length; i++) {
+   errors[i] = validate(form[i])
+}
+
+if(!errors.includes(false)) {
+        const getId = document.querySelector('input[name="radio_users"]:checked').value;
+        const index = user.id.indexOf(getId);
+        document.getElementById("firstName").value = user.firstName[index];
+        document.getElementById("lastName").value = user.lastName[index];
+        document.getElementById("email").value = user.email[index];
+}
+
+});
+
+
+
+document.getElementById("save").addEventListener('click', e => {
+    e.preventDefault();
+
+errors = [];
+
+
+for(let i = 0; i < form.length; i++) {
+   errors[i] = validate(form[i])
+}
+
+if(!errors.includes(false)) {
+        console.log('Saving...');
+        const getId = document.querySelector('input[name="radio_users"]:checked').value;
+        const index = user.id.indexOf(getId);
+
+     
+}
+
+});
