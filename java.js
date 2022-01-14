@@ -82,6 +82,12 @@ const validate = input => {
     }
 }
 
+const addHTML = input => {
+    for(let i = 0; i < user.id.length; i++) {
+    document.getElementById("list").innerHTML += `<input type="radio" name="radio_users" value="${user.id[i]}" id="${user.id}"><label for="${user.id[i]}"></label><li id="${user.id}">${user.firstName[i]} ${user.lastName[i]}</li>`;
+    document.getElementById("list").innerHTML += `<li class="list_small" id="${user.id}"><A href="mailto:${user.email[i]}">${user.email[i]}</A></li><hr>`;
+    }
+};
 
 
 document.getElementById("register").addEventListener('click', e => {
@@ -100,12 +106,7 @@ if(!errors.includes(false)) {
         user.lastName.push(lastName.value);
         user.email.push(email.value);
         document.getElementById("list").innerHTML = '';
-            {
-            for(let i = 0; i < user.id.length; i++) {
-            document.getElementById("list").innerHTML += `<input type="radio" name="radio_users" value="${user.id[i]}" id="${user.id}"><label for="${user.id[i]}"></label><li id="${user.id}">${user.firstName[i]} ${user.lastName[i]}</li>`;
-            document.getElementById("list").innerHTML += `<li class="list_small" id="${user.id}"><A href="mailto:${user.email[i]}">${user.email[i]}</A></li><hr>`;
-            }
-        };
+        addHTML();    
 }
 
 });
@@ -115,6 +116,8 @@ if(!errors.includes(false)) {
 //     document.getElementById("list").innerHTML += `<li class="list_small"><A href="mailto:${user.email[i]}">${user.email[i]}</A></li><hr>`;
 //     }
 // };
+
+
 
 document.getElementById("change").addEventListener('click', e => {
     e.preventDefault();
