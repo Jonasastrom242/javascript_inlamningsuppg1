@@ -100,20 +100,16 @@ if(!errors.includes(false)) {
         user.firstName.push(firstName.value);
         user.lastName.push(lastName.value);
         user.email.push(email.value);
-
-       console.log(user);
-    //    document.getElementById("list").innerHTML += `<input type="radio" id="${nummer.value}"><label for="${nummer.value}"></label><li>${firstName.value} ${lastName.value}</li>`;
-    //    document.getElementById("list").innerHTML += `<li class="list_small"><A href="mailto:${email.value}">${email.value}</A></li>`;
-  
-    for(let i = 0; i < user.id.length; i++) {
-        
-        document.getElementById("list").innerHTML += `<input type="radio" id="${user.id[i]}"><label for="${user.id[i]}"></label><li>${user.firstName[i]} ${user.lastName[i]}</li>`;
-        document.getElementById("list").innerHTML += `<li class="list_small"><A href="mailto:${user.email[i]}">${user.email[i]}</A></li>`;
-        
-        
-    }
-
-
+        document.getElementById("list").innerHTML = '';
+        addHTML();
+        console.log(user);
 }
+
 });
+const addHTML = (input) =>  {
+    for(let i = 0; i < user.id.length; i++) {
+    document.getElementById("list").innerHTML += `<input type="radio" id="${user.id[i]}"><label for="${user.id[i]}"></label><li>${user.firstName[i]} ${user.lastName[i]}</li>`;
+    document.getElementById("list").innerHTML += `<li class="list_small"><A href="mailto:${user.email[i]}">${user.email[i]}</A></li>`;
+    }
+};
 
