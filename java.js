@@ -108,8 +108,8 @@ if(!errors.includes(false)) {
 });
 const addHTML = (input) =>  {
     for(let i = 0; i < user.id.length; i++) {
-    document.getElementById("list").innerHTML += `<input type="radio" id="${user.id[i]}"><label for="${user.id[i]}"></label><li>${user.firstName[i]} ${user.lastName[i]}</li>`;
-    document.getElementById("list").innerHTML += `<li class="list_small"><A href="mailto:${user.email[i]}">${user.email[i]}</A></li>`;
+    document.getElementById("list").innerHTML += `<input type="radio" name="radio_users" value="${user.id[i]}"><label for="${user.id[i]}"></label><li>${user.firstName[i]} ${user.lastName[i]}</li>`;
+    document.getElementById("list").innerHTML += `<li class="list_small"><A href="mailto:${user.email[i]}">${user.email[i]}</A></li><hr>`;
     }
 };
 

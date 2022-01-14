@@ -56,6 +56,7 @@ html, body {
     border-bottom: 1px solid var(--clr-primary);
     padding-bottom: 1rem;
     text-align: center;
+    color: #424242;
 }
 .form-content {
     padding: 1.5rem;
@@ -139,9 +140,9 @@ html, body {
 .list {
     list-style: none;
     font-size: 1.1rem;
-    
+
 }
 .list_small {
     font-size: .9rem;
-    padding-bottom: .5rem;;
+    padding-bottom: .5rem;
 }
