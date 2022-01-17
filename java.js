@@ -13,7 +13,7 @@ const user = {
 
 const validateText = (input) => {
     let checkDigit = /\d+/;
-    let check =  /\W/;       //Jag fattar inte hur jag inkluderar ÅÄÖ i checken.
+    let check =  /\[A-ZÅÄÖa-zåäö]+/;       //Jag fattar inte hur jag inkluderar ÅÄÖ i checken.
 
     
     if(input.value.trim() === '') {
@@ -114,8 +114,6 @@ const validateChange = input => {
     }
 }
 
-
-
 const addHTML = input => {
     for(let i = 0; i < user.id.length; i++) {
     document.getElementById("list").innerHTML += `<div class="flex2"><input type="radio" name="radio_users" value="${user.id[i]}" id="${user.id[i]}" class="radio_btn"><label for="${user.id[i]}"></label><li id="${user.id[i]}">${user.firstName[i]} ${user.lastName[i]}</li></div>`;
@@ -163,22 +161,19 @@ document.getElementById("change").addEventListener('click', e => {
     radera.classList.add('display-none');
 
     const email = document.getElementById("email");
+    email.classList.remove('is-invalid');
     email.classList.add('is-valid');
     
-// errors = [];
 
-
-// for(let i = 0; i < form.length; i++) {
-//    errors[i] = validate(form[i])
-// }
-
-// if(!errors.includes(false)) {
-        const getId = document.querySelector('input[name="radio_users"]:checked').value;
-        const index = user.id.indexOf(getId);
-        document.getElementById("firstName").value = user.firstName[index];
-        document.getElementById("lastName").value = user.lastName[index];
-        document.getElementById("email").value = user.email[index];
-// }
+    const getId = document.querySelector('input[name="radio_users"]:checked').value;
+    const index = user.id.indexOf(getId);
+    document.getElementById("firstName").value = user.firstName[index];
+    document.getElementById("lastName").value = user.lastName[index];
+    document.getElementById("email").value = user.email[index];
+    
+    for(let i = 0; i < form.length; i++) {
+        errors[i] = validateChange(form[i])
+     }
 
 });
 
@@ -194,11 +189,11 @@ document.getElementById("save").addEventListener('click', e => {
 errors = [];
 
 
-for(let i = 0; i < form.length; i++) {
+    for(let i = 0; i < form.length; i++) {
    errors[i] = validateChange(form[i])
-}
+    }
 
-if(!errors.includes(false)) {
+    if(!errors.includes(false)) {
         const getId = document.querySelector('input[name="radio_users"]:checked').value;
         const index = user.id.indexOf(getId);
         user.firstName[index] = document.getElementById("firstName").value;
@@ -208,7 +203,7 @@ if(!errors.includes(false)) {
         document.getElementById(getId).innerHTML += `<li class="list_small" id="${user.id[index]}"><A href="mailto:${user.email[index]}">${user.email[index]}</A></li><hr class="line">`;
         clearHTML();
         addHTML();
-        }
+    }
 
 });
 
