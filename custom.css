@@ -10,7 +10,7 @@ html, body {
 }
 
 :root {
-    --clr-primary: #dbd7d4;
+    --clr-primary: #e9f1f5;
     --clr-error: #e04d4d; 
     --clr-success: #1bb807;
     --border-radius: .7rem;
@@ -32,12 +32,12 @@ html, body {
     cursor: pointer;
 }
 .btn-primary {
-    background-color: #d3beac;
+    background-color: #98a2c0;
     transition: background 100ms;
 }
 .btn-primary:hover,
 .btn-primary:focus {
-    background-color: #9b9b9b;
+    background-color: #bcc2f0;
 }
 .btn-block {
     width: 100%;
@@ -50,6 +50,9 @@ html, body {
     display: flex;
     justify-content: space-between;
 }
+.flex2 {
+    display: flex;
+}
 
 #registerForm {
     background-color: #fafafa;
@@ -57,6 +60,7 @@ html, body {
     border-radius: var(--border-radius);
     min-width: 300px;
     box-shadow: 5px 3px 5px #00000025;
+    margin-bottom: .5rem;
 }
 
 .header {
@@ -140,19 +144,30 @@ is-valid .form-control {
     font-size: 0.7rem;
 }
 .listcontainer {
+    
+    justify-content: left;
+    align-items: left;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-left: 1rem;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    background-color: #fafafa;
+    box-shadow: 5px 3px 5px #00000025;
+    margin-bottom: .5rem;
+    visibility: hidden;
 
 }
 .list {
     list-style: none;
     font-size: 1.1rem;
+    
 
 }
 .list_small {
     font-size: .9rem;
     padding-bottom: .5rem;
+    padding-left: 1.1rem;;
+    
 }
 .invisible {
     visibility: hidden;
@@ -160,6 +175,14 @@ is-valid .form-control {
 .visible {
     visibility: visible;
 }
+.display-none {
+    display: none;
+}
 .line {
-    border: 1px solid #929292;
+    border: 1px solid #d1d0d0;
+    margin-bottom: .7rem;
+}
+.radio_btn {
+    margin-top: .4rem;
+    margin-right: .3rem;
 }

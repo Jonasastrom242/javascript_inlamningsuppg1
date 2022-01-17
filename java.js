@@ -60,6 +60,23 @@ const validateEmail = email => {
     }
 }
 
+const validateEmail2 = email => {
+    let regEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    
+
+    if(email.value.trim() === '') {
+        setError(email, 'Skriv in en epostadress');
+        return false;
+    } else if(!regEx.test(email.value)) {
+        setError(email, 'Epostadressen är inte korrekt');
+        return false;
+    }
+    else {
+        setSuccess(email);
+        return true;
+    }
+}
+
 const setError = (input, textMessage) => {
     const parent = input.parentElement;
     parent.classList.add('is-invalid');
@@ -85,12 +102,23 @@ const validate = input => {
        
     }
 }
+const validateChange = input => {
+    switch(input.type) {
+        case 'text': return validateText(input)
+       
+        case 'email': return validateEmail2(input)
+
+        default:
+        break;
+       
+    }
+}
 
 
 
 const addHTML = input => {
     for(let i = 0; i < user.id.length; i++) {
-    document.getElementById("list").innerHTML += `<input type="radio" name="radio_users" value="${user.id[i]}" id="${user.id[i]}"><label for="${user.id[i]}"></label><li id="${user.id[i]}">${user.firstName[i]} ${user.lastName[i]}</li>`;
+    document.getElementById("list").innerHTML += `<div class="flex2"><input type="radio" name="radio_users" value="${user.id[i]}" id="${user.id[i]}" class="radio_btn"><label for="${user.id[i]}"></label><li id="${user.id[i]}">${user.firstName[i]} ${user.lastName[i]}</li></div>`;
     document.getElementById("list").innerHTML += `<li class="list_small" id="${user.id[i]}"><A href="mailto:${user.email[i]}">${user.email[i]}</A></li><hr class="line">`;
     }
 };
@@ -99,9 +127,6 @@ const clearHTML = input => {
     document.getElementById("list").innerHTML = '';
 };
 
-const checkDouble = input => {
-
-}
 
 //end functions
 
@@ -122,7 +147,10 @@ if(!errors.includes(false)) {
         user.email.push(email.value);
         document.getElementById("list").innerHTML = '';
         addHTML();
-        change.classList.remove('invisible');    
+        change.classList.remove('invisible'); 
+        radera.classList.remove('display-none');
+        listcontainer.classList.add('visible'); 
+
 }
 
 });
@@ -130,8 +158,13 @@ if(!errors.includes(false)) {
 
 document.getElementById("change").addEventListener('click', e => {
     e.preventDefault();
-    save.classList.add('visible');
+    save.classList.remove('display-none');
     register.classList.add('invisible');
+    radera.classList.add('display-none');
+
+    const email = document.getElementById("email");
+    email.classList.add('is-valid');
+    
 // errors = [];
 
 
@@ -151,15 +184,18 @@ document.getElementById("change").addEventListener('click', e => {
 
 
 
+
 document.getElementById("save").addEventListener('click', e => {
     e.preventDefault();
-    save.classList.remove('visible');
-    register.classList.remove('invisible');    
+    radera.classList.remove('display-none');
+    save.classList.add('display-none');
+    register.classList.remove('invisible');
+      
 errors = [];
 
 
 for(let i = 0; i < form.length; i++) {
-   errors[i] = validate(form[i])
+   errors[i] = validateChange(form[i])
 }
 
 if(!errors.includes(false)) {
@@ -174,4 +210,22 @@ if(!errors.includes(false)) {
         addHTML();
         }
 
+});
+
+document.getElementById("radera").addEventListener('click', e => {
+    e.preventDefault();
+    save.classList.add('display-none');
+
+        const getId = document.querySelector('input[name="radio_users"]:checked').value;
+        const index = user.id.indexOf(getId);
+        user.id.splice(index, 1);
+        user.firstName.splice(index, 1);
+        user.lastName.splice(index, 1);
+        user.email.splice(index, 1);
+        clearHTML();
+        addHTML();
+    if(user.id.length === 0) {
+        listcontainer.classList.remove('visible');
+        radera.classList.add('display-none');
+    }
 });
