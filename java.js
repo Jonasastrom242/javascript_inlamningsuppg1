@@ -13,7 +13,7 @@ const user = {
 
 const validateText = (input) => {
     let checkDigit = /\d+/;
-    let check =  /\[A-ZÅÄÖa-zåäö]+/;       //Jag fattar inte hur jag inkluderar ÅÄÖ i checken.
+    let check =  /^[\wáéíóäëiöåúàèììù]+$/i;       //Jag fattar inte hur jag inkluderar ÅÄÖ i checken.
 
     
     if(input.value.trim() === '') {
@@ -29,7 +29,7 @@ else if(checkDigit.test(input.value)) {
     setError(input, 'Namnet kan inte innehålla siffror');
     return false;
 }
-else if(check.test(input.value)) {
+else if(!check.test(input.value)) {
     setError(input, 'Namnet kan inte innehålla annat än bokstäver');
     return false;
 }
@@ -150,7 +150,6 @@ if(!errors.includes(false)) {
         listcontainer.classList.add('visible'); 
 
 }
-
 });
 
 
@@ -176,8 +175,6 @@ document.getElementById("change").addEventListener('click', e => {
      }
 
 });
-
-
 
 
 document.getElementById("save").addEventListener('click', e => {
@@ -207,6 +204,7 @@ errors = [];
 
 });
 
+
 document.getElementById("radera").addEventListener('click', e => {
     e.preventDefault();
     save.classList.add('display-none');
@@ -222,5 +220,6 @@ document.getElementById("radera").addEventListener('click', e => {
     if(user.id.length === 0) {
         listcontainer.classList.remove('visible');
         radera.classList.add('display-none');
+        change.classList.add('invisible');
     }
 });
