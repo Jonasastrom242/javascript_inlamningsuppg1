@@ -16,7 +16,7 @@ html, body {
     --border-radius: .7rem;
 }
 .container {
-    height: 60vh;
+    margin-top: 1rem;;
     width: 100%;
     display: flex;
     align-items: center;
@@ -110,15 +110,16 @@ html, body {
 .is-invalid .invalid-input {
     visibility: visible;
 }
-.is-valid .form-control {
-    border: 1px solid var(--clr-success); 
-    outline: 1px solid var(--clr-success);
+is-valid .form-control {
+    border: 1px solid var(--clr-primary); 
+    outline: 1px solid var(--clr-primary);
 }
 .fa-times-circle {
     color: var(--clr-error)
 }
 .fa-check-circle {
-    color: var(--clr-success)
+    /* color: var(--clr-success) */
+    visibility: hidden;
 }
 .fa-check-circle, 
 .fa-times-circle {
@@ -152,4 +153,13 @@ html, body {
 .list_small {
     font-size: .9rem;
     padding-bottom: .5rem;
+}
+.invisible {
+    visibility: hidden;
+}
+.visible {
+    visibility: visible;
+}
+.line {
+    border: 1px solid #929292;
 }

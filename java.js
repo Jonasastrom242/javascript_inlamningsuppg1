@@ -9,6 +9,8 @@ const user = {
     email : [],
     };
 
+//functions
+
 const validateText = (input) => {
     let checkDigit = /\d+/;
     let check =  /\W/;       //Jag fattar inte hur jag inkluderar ÅÄÖ i checken.
@@ -48,13 +50,15 @@ const validateEmail = email => {
         setError(email, 'Epostadressen är inte korrekt');
         return false;
     }
+    else if(user.email.includes(email.value)) {
+        setError(email, 'Epostadressen finns redan');
+        return false;
+    }
     else {
         setSuccess(email);
         return true;
     }
 }
-
-
 
 const setError = (input, textMessage) => {
     const parent = input.parentElement;
@@ -82,13 +86,24 @@ const validate = input => {
     }
 }
 
+
+
 const addHTML = input => {
     for(let i = 0; i < user.id.length; i++) {
-    document.getElementById("list").innerHTML += `<input type="radio" name="radio_users" value="${user.id[i]}" id="${user.id}"><label for="${user.id[i]}"></label><li id="${user.id}">${user.firstName[i]} ${user.lastName[i]}</li>`;
-    document.getElementById("list").innerHTML += `<li class="list_small" id="${user.id}"><A href="mailto:${user.email[i]}">${user.email[i]}</A></li><hr>`;
+    document.getElementById("list").innerHTML += `<input type="radio" name="radio_users" value="${user.id[i]}" id="${user.id[i]}"><label for="${user.id[i]}"></label><li id="${user.id[i]}">${user.firstName[i]} ${user.lastName[i]}</li>`;
+    document.getElementById("list").innerHTML += `<li class="list_small" id="${user.id[i]}"><A href="mailto:${user.email[i]}">${user.email[i]}</A></li><hr class="line">`;
     }
 };
 
+const clearHTML = input => {
+    document.getElementById("list").innerHTML = '';
+};
+
+const checkDouble = input => {
+
+}
+
+//end functions
 
 document.getElementById("register").addEventListener('click', e => {
     e.preventDefault();
@@ -106,36 +121,31 @@ if(!errors.includes(false)) {
         user.lastName.push(lastName.value);
         user.email.push(email.value);
         document.getElementById("list").innerHTML = '';
-        addHTML();    
+        addHTML();
+        change.classList.remove('invisible');    
 }
 
 });
-// {
-//     for(let i = 0; i < user.id.length; i++) {
-//     document.getElementById("list").innerHTML += `<input type="radio" name="radio_users" value="${user.id[i]}"><label for="${user.id[i]}"></label><li>${user.firstName[i]} ${user.lastName[i]}</li>`;
-//     document.getElementById("list").innerHTML += `<li class="list_small"><A href="mailto:${user.email[i]}">${user.email[i]}</A></li><hr>`;
-//     }
-// };
-
 
 
 document.getElementById("change").addEventListener('click', e => {
     e.preventDefault();
+    save.classList.add('visible');
+    register.classList.add('invisible');
+// errors = [];
 
-errors = [];
 
+// for(let i = 0; i < form.length; i++) {
+//    errors[i] = validate(form[i])
+// }
 
-for(let i = 0; i < form.length; i++) {
-   errors[i] = validate(form[i])
-}
-
-if(!errors.includes(false)) {
+// if(!errors.includes(false)) {
         const getId = document.querySelector('input[name="radio_users"]:checked').value;
         const index = user.id.indexOf(getId);
         document.getElementById("firstName").value = user.firstName[index];
         document.getElementById("lastName").value = user.lastName[index];
         document.getElementById("email").value = user.email[index];
-}
+// }
 
 });
 
@@ -143,7 +153,8 @@ if(!errors.includes(false)) {
 
 document.getElementById("save").addEventListener('click', e => {
     e.preventDefault();
-
+    save.classList.remove('visible');
+    register.classList.remove('invisible');    
 errors = [];
 
 
@@ -152,11 +163,15 @@ for(let i = 0; i < form.length; i++) {
 }
 
 if(!errors.includes(false)) {
-        console.log('Saving...');
         const getId = document.querySelector('input[name="radio_users"]:checked').value;
         const index = user.id.indexOf(getId);
-
-     
-}
+        user.firstName[index] = document.getElementById("firstName").value;
+        user.lastName[index] = document.getElementById("lastName").value;
+        user.email[index] = document.getElementById("email").value;
+        document.getElementById(getId).innerHTML = `<input type="radio" name="radio_users" value="${user.id[index]}" id="${user.id[index]}"><label for="${user.id[index]}"></label><li id="${user.id[index]}">${user.firstName[index]} ${user.lastName[index]}</li>`;
+        document.getElementById(getId).innerHTML += `<li class="list_small" id="${user.id[index]}"><A href="mailto:${user.email[index]}">${user.email[index]}</A></li><hr class="line">`;
+        clearHTML();
+        addHTML();
+        }
 
 });
