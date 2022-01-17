@@ -175,3 +175,6 @@ html, body {
     margin-top: .4rem;
     margin-right: .3rem;
 }
+.red_alert {
+    background-color: #fdb6b6;
+}
